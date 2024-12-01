@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetpack-io/devbox/main/.schema/devbox.schema.json",
+  "packages": ["bun@latest"],
+  "env": {},
+  "shell": {}
+}
