@@ -7,7 +7,7 @@ describe("Day 1", async () => {
     expect(partOne(input)).toEqual(11);
   });
 
-  describe("partTwo", async () => {
+  test("partTwo", async () => {
     const input = await Bun.file(`./src/01/example.txt`).text();
     expect(partTwo(input)).toEqual(31);
   });

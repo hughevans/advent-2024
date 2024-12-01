@@ -1,18 +1,27 @@
+interface Data {
+  listOne: number[];
+  listTwo: number[];
+}
+
 export function parse(input: string) {
   const lines = input.split("\n");
-  const listOne: number[] = [];
-  const listTwo: number[] = [];
+
+  let data: Data = {
+    listOne: [],
+    listTwo: [],
+  };
 
   lines.forEach((line) => {
     let a, b;
     [a, b] = line.split("   ");
+
     if (a && b) {
-      listOne.push(parseInt(a));
-      listTwo.push(parseInt(b));
+      data.listOne.push(parseInt(a));
+      data.listTwo.push(parseInt(b));
     }
   });
 
-  return { listOne, listTwo };
+  return data;
 }
 
 export function sortArray(arr: number[]) {
@@ -25,6 +34,7 @@ export function partOne(input: string) {
   listTwo = sortArray(listTwo);
 
   let sum = 0;
+
   listOne.forEach((a, index) => {
     if (listTwo[index]) {
       sum += Math.abs(a - listTwo[index]);
@@ -37,14 +47,14 @@ export function partOne(input: string) {
 export function partTwo(input: string) {
   let { listOne, listTwo } = parse(input);
 
-  const score = listOne.reduce((aSum, a) => {
-    const rowCount = listTwo.reduce((bSum, b) => {
+  const score = listOne.reduce((runningSum, a) => {
+    const rowCount = listTwo.reduce((instanceCount, b) => {
       if (a === b) {
-        return (bSum += 1);
+        return (instanceCount += 1);
       }
-      return bSum;
+      return instanceCount;
     }, 0);
-    return aSum + rowCount * a;
+    return runningSum + rowCount * a;
   }, 0);
 
   return score;
